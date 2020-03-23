@@ -1,11 +1,13 @@
 package com.xuqm.frame;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.xuqm.base.common.LogHelper;
 import com.xuqm.base.ui.BaseActivity;
+import com.xuqm.frame.databinding.ActivityMainBinding;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public int getLayoutId() {
@@ -15,7 +17,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
 
-        findViewById(R.id.hello).setOnClickListener(v -> {
+        setTitleText("Main Activity");
+        setTextColor(0xffFF4444);
+        setIconTintColor(0xffFF4444);
+        backBtnPressed(() -> Toast.makeText(mContext, "Hello", Toast.LENGTH_SHORT).show());
+        getBinding().hello.setOnClickListener(v -> {
             LogHelper.d(TAG, "Hello World");
         });
     }

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -13,6 +15,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.xuqm.base.R;
 import com.xuqm.base.common.AppManager;
 import com.xuqm.base.databinding.ActivityBaseBinding;
+import com.xuqm.base.ui.callback.ToolBarListener;
 import com.xuqm.base.ui.callback.UiCallback;
 
 public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatActivity implements UiCallback {
@@ -20,6 +23,8 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     protected String TAG = this.getClass().getSimpleName();
     protected Activity mContext;
     private V binding;
+
+    private ActivityBaseBinding baseBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,15 +44,90 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
             bindUI(getLayoutId());
             ImmersionBar.with(this).transparentBar().init();
         } else {//使用base提供的toolbar
-            ActivityBaseBinding baseBinding = DataBindingUtil.setContentView(mContext, R.layout.activity_base);
+            baseBinding = DataBindingUtil.setContentView(mContext, R.layout.activity_base);
             ImmersionBar.with(this)
                     .titleBar(baseBinding.baseToolbar) //指定标题栏view
                     .init();
             binding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), baseBinding.activityRootView, true);
         }
+        if (null != baseBinding && null == backListener) {
+            baseBinding.baseToolbar.backBtnPressed(this::finish);
+        }
         initView(savedInstanceState);
         initData();
     }
+
+    @NonNull
+    public V getBinding() {
+        return binding;
+    }
+
+    /**
+     * 导航栏展示的内容
+     *
+     * @param titleId 标题
+     */
+    public void setTitleText(@StringRes int titleId) {
+        setTitleText(getText(titleId));
+    }
+
+    /**
+     * 导航栏展示的内容
+     *
+     * @param title 标题
+     */
+    public void setTitleText(CharSequence title) {
+        if (null == baseBinding) return;
+        baseBinding.baseToolbar.setTitle(title);
+    }
+
+    /**
+     * 设置标题颜色
+     *
+     * @param color 标题颜色
+     */
+    public void setTextColor(int color) {
+        if (null == baseBinding) return;
+        baseBinding.baseToolbar.setTextColor(color);
+    }
+
+    /**
+     * 设置返回图标颜色
+     *
+     * @param iconTintColor 返回图标颜色
+     */
+    public void setIconTintColor(int iconTintColor) {
+        if (null == baseBinding) return;
+        baseBinding.baseToolbar.setIconTintColor(iconTintColor);
+    }
+
+    /**
+     * 是否展示返回按钮
+     *
+     * @param showBack 是否展示返回按钮
+     */
+    public void showBack(boolean showBack) {
+        if (null == baseBinding) return;
+        baseBinding.baseToolbar.setShowBack(showBack);
+    }
+
+    /**
+     * 是否显示导航栏下面的线
+     *
+     * @param showLine 是否显示导航栏下面的线
+     */
+    public void showLine(boolean showLine) {
+        if (null == baseBinding) return;
+        baseBinding.baseToolbar.setShowLine(showLine);
+    }
+
+    private ToolBarListener backListener;
+
+    public void backBtnPressed(ToolBarListener listener) {
+        backListener = listener;
+        baseBinding.baseToolbar.backBtnPressed(listener);
+    }
+
 
     protected void bindUI(@LayoutRes int layoutResID) {
         binding = DataBindingUtil.setContentView(mContext, layoutResID);
