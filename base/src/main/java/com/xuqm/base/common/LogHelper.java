@@ -1,6 +1,6 @@
 package com.xuqm.base.common;
 
-import com.xuqm.base.common.xlog.XLog;
+import com.socks.library.KLog;
 
 import java.util.Locale;
 
@@ -12,33 +12,33 @@ public class LogHelper {
 
 
     public static void d(String tag, Object object) {
-        XLog.tag(tag).d(object);
+        KLog.d(tag, object);
     }
 
     public static void d(Object object) {
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
-        XLog.tag(tag).d(object);
+        KLog.d(tag, object);
     }
 
     public static void e(String tag, Object object) {
-        XLog.tag(tag).e(object);
+        KLog.e(tag, object);
     }
 
     public static void e(Object object) {
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
-        XLog.tag(tag).e(object);
+        KLog.e(tag, object);
     }
 
     public static void e(String msg, Throwable tr) {
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
-        XLog.tag(tag).e(msg, tr);
+        KLog.e(tag, msg, tr);
     }
 
     public static void e(String tag, String msg, Throwable tr) {
-        XLog.tag(tag).e(msg, tr);
+        KLog.e(tag, msg, tr);
     }
 
 

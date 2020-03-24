@@ -3,9 +3,16 @@ package com.xuqm.frame;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.socks.library.KLog;
+import com.xuqm.base.App;
 import com.xuqm.base.common.LogHelper;
 import com.xuqm.base.ui.BaseActivity;
 import com.xuqm.frame.databinding.ActivityMainBinding;
+import com.xuqm.frame.repository.Service;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
@@ -17,12 +24,21 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public void initView(Bundle savedInstanceState) {
 
+        Service api = App.getInstance().appComponent.retrofit().create(Service.class);
+
         setTitleText("Main Activity");
         setTextColor(0xffFF4444);
         setIconTintColor(0xffFF4444);
         backBtnPressed(() -> Toast.makeText(mContext, "Hello", Toast.LENGTH_SHORT).show());
         getBinding().hello.setOnClickListener(v -> {
             LogHelper.d(TAG, "Hello World");
+
+            Disposable d = api.getAd()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(userHttpResult -> KLog.d(userHttpResult.toString()), throwable -> LogHelper.e("=====", throwable));
+
+
         });
     }
 

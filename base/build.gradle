@@ -24,6 +24,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api androidxDependencies
+    annotationProcessor compilerDependencies
     commonDependencies.each { k, v ->
         api(v) {
             //去除第三方的重复support库
