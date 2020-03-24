@@ -5,7 +5,7 @@ import android.app.Application;
 import com.socks.library.KLog;
 import com.xuqm.base.di.component.AppComponent;
 import com.xuqm.base.di.component.DaggerAppComponent;
-import com.xuqm.base.di.module.ApplicationModule;
+import com.xuqm.base.di.module.NetworkModule;
 
 public class App extends Application {
 
@@ -26,7 +26,7 @@ public class App extends Application {
 
     public App() {
         instance = this;
-        appComponent = DaggerAppComponent.builder().applicationModule(new ApplicationModule(this)).build();
+        appComponent = DaggerAppComponent.builder().networkModule(new NetworkModule()).build();
     }
 
     @Override

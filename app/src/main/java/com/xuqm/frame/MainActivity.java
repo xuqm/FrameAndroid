@@ -3,12 +3,14 @@ package com.xuqm.frame;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.socks.library.KLog;
+import com.google.android.material.snackbar.Snackbar;
 import com.xuqm.base.App;
 import com.xuqm.base.common.LogHelper;
 import com.xuqm.base.ui.BaseActivity;
 import com.xuqm.frame.databinding.ActivityMainBinding;
 import com.xuqm.frame.repository.Service;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -36,7 +38,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             Disposable d = api.getAd()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(userHttpResult -> KLog.d(userHttpResult.toString()), throwable -> LogHelper.e("=====", throwable));
+                    .subscribe(userHttpResult -> Snackbar.make(getBinding().hello, userHttpResult.toString(), Snackbar.LENGTH_SHORT).show(), throwable -> LogHelper.e("=====", throwable));
 
 
         });
@@ -45,6 +47,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public void initData() {
 
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.Group.STORAGE)
+                .onDenied(data -> {
+
+                })
+                .onGranted(data -> {
+
+                }).start();
     }
 
 }

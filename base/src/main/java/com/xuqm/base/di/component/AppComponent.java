@@ -1,7 +1,7 @@
 package com.xuqm.base.di.component;
 
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.xuqm.base.di.module.ApplicationModule;
+import com.xuqm.base.di.module.NetworkModule;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 @Singleton
-@Component(modules = ApplicationModule.class)
+@Component(modules = NetworkModule.class)
 public interface AppComponent {
     Retrofit retrofit();
 
