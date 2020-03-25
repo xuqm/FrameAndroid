@@ -39,6 +39,7 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
         viewModel = new ViewModelProvider(this).get(cal);
         adapter = adapter();
         adapter.setItemClickListener(this::itemClicked);
+        adapter.setItemLongClickListener(this::itemLongClicked);
         getBinding().baseRecyclerView.setAdapter(adapter);
         getBinding().baseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         getBinding().baseRefreshLayout.setOnRefreshListener(() -> viewModel.invalidate());
@@ -79,6 +80,10 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
 
     public void itemClicked(View view, T item, int position) {
 
+    }
+
+    public boolean itemLongClicked(View view, T item, int position) {
+        return false;
     }
 
     public void refreshFinished(RefreshResult result) {

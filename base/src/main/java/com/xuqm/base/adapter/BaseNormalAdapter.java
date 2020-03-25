@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xuqm.base.adapter.callback.PageAdapterClickListener;
+import com.xuqm.base.adapter.callback.AdapterItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public abstract class BaseNormalAdapter<T> extends RecyclerView.Adapter<ViewHold
     private List<T> list;
     private Context context;
 
-    private PageAdapterClickListener<T> listener;
+    private AdapterItemClickListener<T> listener;
 
     public BaseNormalAdapter(int layoutId) {
         this.layoutId = layoutId;
@@ -47,7 +47,7 @@ public abstract class BaseNormalAdapter<T> extends RecyclerView.Adapter<ViewHold
         return list.size();
     }
 
-    public void setListener(PageAdapterClickListener<T> listener) {
+    public void setListener(AdapterItemClickListener<T> listener) {
         this.listener = listener;
     }
     public abstract void convert(ViewHolder holder, T item, int position);

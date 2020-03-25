@@ -2,6 +2,6 @@ package com.xuqm.base.adapter.callback;
 
 import android.view.View;
 
-public interface PageAdapterClickListener<T> {
+public interface AdapterItemClickListener<T> {
     void onClick(View view, T item, int position);
 }
