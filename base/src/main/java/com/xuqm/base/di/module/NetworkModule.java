@@ -24,6 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
     private String BaseUrl = "https://www.wanandroid.com";///hbdc/s/air/sddc/aqi24hour?cityId=1&monitorIds=1
 
+    public NetworkModule() {
+    }
+
+    public NetworkModule(String baseUrl) {
+        BaseUrl = baseUrl;
+    }
+
     @Provides
     @Singleton
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {

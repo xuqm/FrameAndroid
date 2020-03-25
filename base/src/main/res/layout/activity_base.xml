@@ -11,7 +11,7 @@
             android:id="@+id/baseToolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
-            android:background="#666" />
+            android:background="#fff" />
 
     </LinearLayout>
 </layout>

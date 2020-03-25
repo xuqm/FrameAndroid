@@ -26,9 +26,9 @@ public class App extends Application {
 
     public App() {
         instance = this;
-        appComponent = DaggerAppComponent.builder().networkModule(new NetworkModule()).build();
+        appComponent = DaggerAppComponent.builder().networkModule(new NetworkModule("https://www.wanandroid.com")).build();
     }
-
+//https://www.wanandroid.com/wxarticle/list/408/1/json
     @Override
     public void onCreate() {
         super.onCreate();
