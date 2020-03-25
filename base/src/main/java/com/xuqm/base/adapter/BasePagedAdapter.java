@@ -29,7 +29,7 @@ public abstract class BasePagedAdapter<T extends BaseItem> extends PagedListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        bindViewHolder(holder, getItem(position), position);
+        convert(holder, getItem(position), position);
     }
 
     @Override
@@ -40,19 +40,19 @@ public abstract class BasePagedAdapter<T extends BaseItem> extends PagedListAdap
         bindViewHolder(holder, getItem(position), position, payloads);
     }
 
-    public void bindViewHolder(ViewHolder holder, T item, int position, List<Object> payloads) {
-        bindViewHolder(holder, item, position);
+    private void bindViewHolder(ViewHolder holder, T item, int position, List<Object> payloads) {
+        convert(holder, item, position);
     }
 
     public void setItemClickListener(PageAdapterClickListener<T> itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
-    public PageAdapterClickListener<T> getItemClickListener() {
+    protected PageAdapterClickListener<T> getItemClickListener() {
         return itemClickListener;
     }
 
-    public abstract void bindViewHolder(ViewHolder holder, T item, int position);
+    public abstract void convert(ViewHolder holder, T item, int position);
 
     public void changeItem(int position) {
         if (0 <= position && position < getItemCount()) {

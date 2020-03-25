@@ -47,14 +47,18 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
         <!--        下面时act信息-->
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.WelcomeActivity" />
+        <activity
+            android:name=".ui.WelcomeActivity"
+            android:screenOrientation="nosensor" />
 
     </application>
 

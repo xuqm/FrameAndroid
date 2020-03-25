@@ -12,7 +12,7 @@ public class UserAdapter extends BasePagedAdapter<User> {
     }
 
     @Override
-    public void bindViewHolder(ViewHolder holder, User item, int position) {
+    public void convert(ViewHolder holder, User item, int position) {
 
         holder.setText(R.id.tvTitle, item.getTitle())
                 .setClickListener(R.id.tvTitle, view -> getItemClickListener().onClick(view, item, position));

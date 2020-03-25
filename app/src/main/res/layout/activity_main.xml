@@ -2,7 +2,6 @@
 <layout>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,15 +9,10 @@
         tools:context=".MainActivity">
 
 
-        <TextView
-            android:id="@+id/hello"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/baseRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="Hello World!"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
