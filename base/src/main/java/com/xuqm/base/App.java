@@ -4,8 +4,7 @@ import android.app.Application;
 
 import com.socks.library.KLog;
 import com.xuqm.base.di.component.AppComponent;
-import com.xuqm.base.di.component.DaggerAppComponent;
-import com.xuqm.base.di.module.NetworkModule;
+import com.xuqm.base.di.manager.HttpManager;
 
 public class App extends Application {
 
@@ -26,7 +25,7 @@ public class App extends Application {
 
     public App() {
         instance = this;
-        appComponent = DaggerAppComponent.builder().networkModule(new NetworkModule("https://www.wanandroid.com")).build();
+        appComponent = HttpManager.getAppComponent("https://www.wanandroid.com");
     }
 //https://www.wanandroid.com/wxarticle/list/408/1/json
     @Override

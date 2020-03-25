@@ -15,15 +15,6 @@ public class MainActivity extends BaseListActivity<User, LoginViewModel> {
 
 
     private UserAdapter adapter = new UserAdapter();
-//            new CommonPagedAdapter<User>(R.layout.user_item_user) {
-//
-//        @Override
-//        public void convert(ViewHolder holder, User item, int position) {
-//
-//            holder.setText(R.id.tvTitle, item.getTitle())
-//                    .setClickListener(R.id.tvTitle, view -> getItemClickListener().onClick(view, item, position));
-//        }
-//    };
 
     @Override
     public BasePagedAdapter<User> adapter() {
@@ -42,6 +33,7 @@ public class MainActivity extends BaseListActivity<User, LoginViewModel> {
         LogHelper.e(view.toString());
         if (R.id.tvTitle == view.getId()) {
             ToolsHelper.snack(view, item.toString());
+            getViewModel().get();
         }
     }
 }

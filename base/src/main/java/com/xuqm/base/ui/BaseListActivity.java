@@ -34,6 +34,10 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
         return R.layout.activity_base_list;
     }
 
+    public VM getViewModel() {
+        return viewModel;
+    }
+
     @Override
     public void initView(Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(cal);
