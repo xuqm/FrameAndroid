@@ -27,6 +27,8 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initView();
+        initData();
     }
 
     @NonNull
