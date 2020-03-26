@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FrameAndroid</string>
+    <string name="digits">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
 </resources>

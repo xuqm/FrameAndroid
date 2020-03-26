@@ -38,7 +38,7 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
         } else if (!showToolbar()) {//没有toolbar但是有状态栏的情况
             bindUI(getLayoutId());
             ImmersionBar.with(this)
-                    .titleBar(binding.getRoot()) //指定标题栏view
+                        .titleBar(binding.getRoot()) //指定标题栏view
                     .init();
         } else if (transparentStatusBar()) {//透明状态栏，但是显示状态栏的内容
             bindUI(getLayoutId());

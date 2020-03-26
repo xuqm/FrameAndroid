@@ -1,4 +1,4 @@
-package com.xuqm.frame.ui;
+package com.xuqm.frame.ui.adapter;
 
 import com.xuqm.base.adapter.BasePagedAdapter;
 import com.xuqm.base.adapter.ItemViewDelegate;

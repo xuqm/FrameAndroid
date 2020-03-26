@@ -1,4 +1,4 @@
-package com.xuqm.frame;
+package com.xuqm.frame.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +7,9 @@ import com.xuqm.base.adapter.BasePagedAdapter;
 import com.xuqm.base.common.LogHelper;
 import com.xuqm.base.common.ToolsHelper;
 import com.xuqm.base.ui.BaseListActivity;
+import com.xuqm.frame.R;
 import com.xuqm.frame.model.User;
-import com.xuqm.frame.ui.UserAdapter;
+import com.xuqm.frame.ui.adapter.UserAdapter;
 import com.xuqm.frame.viewmodel.LoginViewModel;
 
 public class MainActivity extends BaseListActivity<User, LoginViewModel> {
