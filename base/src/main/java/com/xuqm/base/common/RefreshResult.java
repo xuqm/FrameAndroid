@@ -1,5 +1,8 @@
 package com.xuqm.base.common;
 
-public enum  RefreshResult {
+/**
+ * 下拉刷新的状态码表
+ */
+public enum RefreshResult {
     SUCCEED, FAILED, NO_DATA, NO_MORE
 }

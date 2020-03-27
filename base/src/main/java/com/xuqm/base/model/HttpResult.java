@@ -2,6 +2,11 @@ package com.xuqm.base.model;
 
 import androidx.annotation.NonNull;
 
+/**
+ * 通用的HttpResult封装，app应该根据接口情况定制化配置
+ *
+ * @param <T>
+ */
 public class HttpResult<T> {
     private String status;
     private String maxNumber;

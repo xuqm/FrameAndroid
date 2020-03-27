@@ -11,6 +11,13 @@ import com.xuqm.base.adapter.callback.AdapterItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 不用{@link BasePagedAdapter}的时候，可以用这个
+ *
+ * 这个adapter后续还要改，需要支持viewType的设置
+ *
+ * @param <T> 数据各式
+ */
 public abstract class BaseNormalAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     private int layoutId;
@@ -50,6 +57,7 @@ public abstract class BaseNormalAdapter<T> extends RecyclerView.Adapter<ViewHold
     public void setListener(AdapterItemClickListener<T> listener) {
         this.listener = listener;
     }
+
     public abstract void convert(ViewHolder holder, T item, int position);
 
 }

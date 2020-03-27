@@ -27,7 +27,8 @@ public class App extends Application {
         instance = this;
         appComponent = HttpManager.getAppComponent("https://www.wanandroid.com");
     }
-//https://www.wanandroid.com/wxarticle/list/408/1/json
+
+    //https://www.wanandroid.com/wxarticle/list/408/1/json
     @Override
     public void onCreate() {
         super.onCreate();

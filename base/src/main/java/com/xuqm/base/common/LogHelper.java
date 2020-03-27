@@ -5,7 +5,7 @@ import com.socks.library.KLog;
 import java.util.Locale;
 
 /**
- * 日志库用的是 XLog(https://github.com/elvishew/xLog)
+ * 日志库用的是 KLog
  * 平常自己调试时候不想用那么多，就随便写了个类
  */
 public class LogHelper {

@@ -10,10 +10,18 @@ import com.xuqm.base.common.LogHelper;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * ViewModel 基类
+ */
 public abstract class BaseViewModel extends ViewModel implements DefaultLifecycleObserver {
     private final String TAG = getClass().getSimpleName();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    /**
+     * Disposable 的管理，自动处理网络请求
+     *
+     * @param d Disposable
+     */
     protected void add(Disposable d) {
         compositeDisposable.add(d);
     }

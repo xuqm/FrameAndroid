@@ -18,6 +18,9 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import com.xuqm.base.R;
 import com.xuqm.base.ui.callback.ToolBarListener;
 
+/**
+ * 自定义的toolbar
+ */
 public class ToolbarLayout extends FrameLayout {
 
     private CharSequence title = "";

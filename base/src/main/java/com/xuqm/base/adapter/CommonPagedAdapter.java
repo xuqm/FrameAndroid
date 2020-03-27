@@ -1,5 +1,13 @@
 package com.xuqm.base.adapter;
 
+/**
+ * 这个adapter主要是用来简化通用列表页的绘制
+ * 如果item只有一种样式，或者说不需要用到itemViewType，可以直接使用这个
+ * <p>
+ * 构造函数直接传入对应的layoutId，然后重写convert方法就可以了
+ *
+ * @param <T> item用到的数据类型
+ */
 public abstract class CommonPagedAdapter<T extends BaseItem> extends BasePagedAdapter<T> {
 
 
@@ -23,6 +31,6 @@ public abstract class CommonPagedAdapter<T extends BaseItem> extends BasePagedAd
         });
     }
 
-    public abstract void convert(ViewHolder holder, T item, int position);
+    protected abstract void convert(ViewHolder holder, T item, int position);
 
 }

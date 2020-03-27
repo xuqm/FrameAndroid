@@ -20,6 +20,17 @@ import com.xuqm.base.viewmodel.callback.DataObserverCallback;
 
 import java.lang.reflect.ParameterizedType;
 
+/**
+ * 列表页面的activity继承这个，只需要指定一个adapter就可以展示数据了
+ * 例子参考：
+ * MainActivity extends BaseListActivity<User, MainViewModel>
+ *
+ * User需要继承{@link BaseItem}
+ * MainViewModel 需要继承{@link BaseListViewModel}
+ *
+ * @param <T>
+ * @param <VM>
+ */
 public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListViewModel<T>>
         extends BaseActivity<ActivityBaseListBinding> {
 
@@ -34,6 +45,11 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
         return R.layout.activity_base_list;
     }
 
+    /**
+     * 获取到viewModel，可以做其它事情，比如item的增删改查等
+     *
+     * @return viewModel
+     */
     public VM getViewModel() {
         return viewModel;
     }
@@ -52,22 +68,26 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
     @Override
     public void initData() {
 
+        /*
+          数据更新更新事件的观察者
+         */
         viewModel.observeDataObserver(this, new DataObserverCallback<T>() {
             @Override
             public void data(PagedList<T> data) {
-                adapter.submitList(data);
+                adapter.submitList(data);//数据加载
             }
 
             @Override
             public void refreshResult(RefreshResult refreshResult) {
-                refreshFinished(refreshResult);
+                refreshFinished(refreshResult);//刷新状态处理
             }
 
             @Override
             public void loadMoreResult(RefreshResult refreshResult) {
-                loadMoreFinished(refreshResult);
+                loadMoreFinished(refreshResult);//加载更多的处理
             }
         });
+        //数据更新处理观察者
         viewModel.observeAdapterObserver(this, new AdapterObserverCallback() {
             @Override
             public void notifyItem(int position, Object payload) {
@@ -82,15 +102,30 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
 
     }
 
+    /**
+     * 如果需要对item的点击事件做处理，直接重写这个方法就可以了
+     *
+     * @param view     view
+     * @param item     item
+     * @param position position
+     */
     public void itemClicked(View view, T item, int position) {
 
     }
 
+    /**
+     * 如果需要对item的长按事件做处理，直接重写这个方法就可以了
+     *
+     * @param view     view
+     * @param item     item
+     * @param position position
+     * @return true
+     */
     public boolean itemLongClicked(View view, T item, int position) {
         return false;
     }
 
-    public void refreshFinished(RefreshResult result) {
+    private void refreshFinished(RefreshResult result) {
         getBinding().baseRefreshLayout.setRefreshing(false);
 
         if (result == RefreshResult.SUCCEED)
@@ -105,9 +140,7 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
         }
     }
 
-    public void loadMoreFinished(RefreshResult result) {
-
-
+    private void loadMoreFinished(RefreshResult result) {
 //        if (result == RefreshResult.SUCCEED) {
 //        } else if (result == RefreshResult.FAILED) {
 //        } else
@@ -117,5 +150,11 @@ public abstract class BaseListActivity<T extends BaseItem, VM extends BaseListVi
 
     }
 
+    /**
+     * 需要指定一个adapter，item只有一种类型的使用{@link com.xuqm.base.adapter.CommonPagedAdapter}
+     * 需要指定一个adapter，item有多种类型的使用{@link com.xuqm.base.adapter.BasePagedAdapter}
+     *
+     * @return 自定义的adapter
+     */
     public abstract BasePagedAdapter<T> adapter();
 }

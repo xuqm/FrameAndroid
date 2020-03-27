@@ -4,6 +4,9 @@ import android.app.Activity;
 
 import java.util.Stack;
 
+/**
+ * activity的管理栈
+ */
 public class AppManager {
 
 
@@ -26,21 +29,33 @@ public class AppManager {
         activityStack.add(activity);
     }
 
+    /**
+     * 推出一个activity 其实toolbar的返回按钮，可以直接使用这个方法
+     *
+     * @param activity 需要退出的activity
+     */
     public void popActivity(Activity activity) {
         if (activityStack != null && activityStack.size() > 0) {
             if (activity != null) {
                 activity.finish();
                 activityStack.remove(activity);
-                activity = null;
             }
 
         }
     }
 
+    /**
+     * 获取当前最上面的那个activity
+     *
+     * @return
+     */
     public Activity getActivity() {
         return activityStack.lastElement();
     }
 
+    /**
+     * 退出app
+     */
     public void exit() {
         if (activityStack != null) {
             while (activityStack.size() > 0) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -46,5 +47,13 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     }
 
     protected void initData() {
+    }
+
+    /**
+     * 收起键盘
+     */
+    protected void hideSoftInput() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
     }
 }

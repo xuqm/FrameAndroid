@@ -2,16 +2,16 @@
 <layout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/activityRootView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+                  android:id="@+id/activityRootView"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
 
         <com.xuqm.base.view.ToolbarLayout
-            android:id="@+id/baseToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/title_height"
-            android:background="#fff" />
+                android:id="@+id/baseToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_height"
+                android:background="#fff"/>
 
     </LinearLayout>
 </layout>

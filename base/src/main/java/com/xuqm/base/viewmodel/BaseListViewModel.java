@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ *
+ * @param <T>
+ */
 public abstract class BaseListViewModel<T> extends BaseViewModel implements PagedDataLoader<T> {
 
     public int pageSize() {

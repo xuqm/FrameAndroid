@@ -13,6 +13,10 @@ import com.xuqm.base.R;
 import com.xuqm.base.common.LogHelper;
 import com.xuqm.base.view.enu.Status;
 
+/**
+ * 自定义的view
+ * 展示不同的数据加载状态
+ */
 public class EmptyView extends FrameLayout {
 
     private View contentView;
