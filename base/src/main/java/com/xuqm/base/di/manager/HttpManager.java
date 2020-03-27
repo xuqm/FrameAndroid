@@ -11,19 +11,29 @@ import java.util.Map;
 public class HttpManager {
 
     private static Map<String, Object> apis = new HashMap<>();
+    private static Map<String, AppComponent> appComponentMap = new HashMap<>();
 
     public static <T> T getApi(final Class<T> service) {
         return getApi(App.getInstance().appComponent, service);
     }
 
     public static <T> T getApi(AppComponent appComponent, final Class<T> service) {
-        if (!apis.containsKey(service.getCanonicalName()))
-            apis.put(service.getCanonicalName(), appComponent.retrofit().create(service));
+        String key = appComponent.hashCode() + service.getCanonicalName();
+        if (!apis.containsKey(key))
+            synchronized (HttpManager.class) {
+                if (!apis.containsKey(key))
+                    apis.put(key, appComponent.retrofit().create(service));
+            }
 
-        return (T) apis.get(service.getCanonicalName());
+        return (T) apis.get(key);
     }
 
     public static AppComponent getAppComponent(String baseUrl) {
-        return DaggerAppComponent.builder().networkModule(new NetworkModule(baseUrl)).build();
+        if (!appComponentMap.containsKey(baseUrl))
+            synchronized (HttpManager.class) {
+                if (!appComponentMap.containsKey(baseUrl))
+                    appComponentMap.put(baseUrl, DaggerAppComponent.builder().networkModule(new NetworkModule(baseUrl)).build());
+            }
+        return appComponentMap.get(baseUrl);
     }
 }

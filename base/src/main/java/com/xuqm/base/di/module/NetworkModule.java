@@ -6,7 +6,6 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.google.gson.GsonBuilder;
 import com.socks.library.KLog;
 import com.xuqm.base.App;
-import com.xuqm.base.di.manager.RetrofitManager;
 
 import java.util.List;
 
@@ -36,15 +35,12 @@ public class NetworkModule {
     @Singleton
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {
 
-        Retrofit retrofit = RetrofitManager.getRetrofit(BaseUrl);
-        if (null == retrofit) retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(BaseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-
-        return retrofit;
     }
 
     @Provides

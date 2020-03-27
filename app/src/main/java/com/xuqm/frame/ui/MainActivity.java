@@ -1,5 +1,7 @@
 package com.xuqm.frame.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,5 +38,9 @@ public class MainActivity extends BaseListActivity<User, LoginViewModel> {
             ToolsHelper.snack(view, item.toString());
             getViewModel().get();
         }
+    }
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
     }
 }

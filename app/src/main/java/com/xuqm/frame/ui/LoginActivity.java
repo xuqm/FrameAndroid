@@ -36,7 +36,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     }
 
     public void goRegister() {
-        LogHelper.e("=============================>");
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(

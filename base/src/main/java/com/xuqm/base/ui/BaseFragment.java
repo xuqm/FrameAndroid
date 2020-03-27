@@ -1,5 +1,6 @@
 package com.xuqm.base.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,13 @@ import androidx.fragment.app.Fragment;
 public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
 
     private V binding;
+    protected Context mContext;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), container, false);
+        mContext = getActivity();
         return binding.getRoot();
     }
 
