@@ -3,10 +3,11 @@ package com.xuqm.base.adapter;
 import java.util.List;
 
 /**
- * 这个adapter主要是用来简化通用列表页的绘制
+ * 这个adapter主要是用来简化通用adapter
  * 如果item只有一种样式，或者说不需要用到itemViewType，可以直接使用这个
  * <p>
  * 构造函数直接传入对应的layoutId，然后重写convert方法就可以了
+ * list不传的话，后面使用{@link #setmDatas(List)} 添加就可以了
  *
  * @param <T> item用到的数据类型
  */
