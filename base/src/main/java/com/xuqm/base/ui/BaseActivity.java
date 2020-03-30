@@ -143,6 +143,16 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
 
     }
 
+    @Override
+    public void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
     /**
      * 是否需要展示toolbar，默认为true，使用默认布局展示toolbar
      * false的话，可以自定义toolbar

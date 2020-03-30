@@ -29,7 +29,7 @@ public class WelcomeActivity extends BaseActivity {
         AndPermission.with(this)
                 .runtime()
                 .permission(Permission.Group.STORAGE)
-                .onDenied(data -> LoginActivity.startActivity(mContext))
-                .onGranted(data -> LoginActivity.startActivity(mContext)).start();
+                .onDenied(data -> MainActivity.startActivity(mContext))
+                .onGranted(data -> MainActivity.startActivity(mContext)).start();
     }
 }
