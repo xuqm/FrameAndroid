@@ -30,6 +30,9 @@ public class WelcomeActivity extends BaseActivity {
                 .runtime()
                 .permission(Permission.Group.STORAGE)
                 .onDenied(data -> MainActivity.startActivity(mContext))
-                .onGranted(data -> MainActivity.startActivity(mContext)).start();
+                .onGranted(data -> {
+                    MainActivity.startActivity(mContext);
+                    finish();
+                }).start();
     }
 }

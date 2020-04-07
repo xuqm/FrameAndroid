@@ -26,4 +26,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':base')
     annotationProcessor compilerDependencies
+    implementation 'com.youth.banner:banner:2.0.2'
+
 }

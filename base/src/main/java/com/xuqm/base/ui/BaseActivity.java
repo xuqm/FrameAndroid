@@ -3,8 +3,10 @@ package com.xuqm.base.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.xuqm.base.R;
 import com.xuqm.base.common.AppManager;
 import com.xuqm.base.databinding.ActivityBaseBinding;
-import com.xuqm.base.ui.callback.ToolBarListener;
 import com.xuqm.base.ui.callback.UiCallback;
 
 public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatActivity implements UiCallback {
@@ -28,6 +30,7 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
 
     private ActivityBaseBinding baseBinding;
 
+    //setStatusBarDarkFont
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,18 +45,22 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
             ImmersionBar.with(this)
                     .titleBar(binding.getRoot()) //指定标题栏view
                     .init();
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         } else if (transparentStatusBar()) {//透明状态栏，但是显示状态栏的内容
             bindUI(getLayoutId());
-            ImmersionBar.with(this).transparentBar().init();
+            ImmersionBar.with(this).transparentBar().hideBar(BarHide.FLAG_HIDE_STATUS_BAR).init();
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
         } else {//使用base提供的toolbar
             baseBinding = DataBindingUtil.setContentView(mContext, R.layout.activity_base);
             ImmersionBar.with(this)
                     .titleBar(baseBinding.baseToolbar) //指定标题栏view
                     .init();
+
             binding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), baseBinding.activityRootView, true);
         }
-        if (null != baseBinding && null == backListener) {
-            baseBinding.baseToolbar.backBtnPressed(this::finish);
+        if (null != baseBinding) {
+            baseBinding.baseToolbar.backBtnPressed(this::backBtnPressed);
         }
         initView(savedInstanceState);
         initData();
@@ -103,6 +110,11 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
         baseBinding.baseToolbar.setIconTintColor(iconTintColor);
     }
 
+    public void setIconDraw(@DrawableRes int resId) {
+        if (null == baseBinding) return;
+        baseBinding.baseToolbar.getBackBtn().setImageResource(resId);
+    }
+
     /**
      * 是否展示返回按钮
      *
@@ -123,11 +135,9 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
         baseBinding.baseToolbar.setShowLine(showLine);
     }
 
-    private ToolBarListener backListener;
 
-    public void backBtnPressed(ToolBarListener listener) {
-        backListener = listener;
-        baseBinding.baseToolbar.backBtnPressed(listener);
+    public void backBtnPressed() {
+        finish();
     }
 
 

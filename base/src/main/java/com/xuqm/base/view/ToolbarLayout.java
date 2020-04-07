@@ -90,12 +90,7 @@ public class ToolbarLayout extends FrameLayout {
             getBackBtn().setVisibility(showBack ? VISIBLE : GONE);
             if (showBack) {
                 tintIcon(iconTintColor);
-                getBackBtn().setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        backListener.back();
-                    }
-                });
+                getBackBtn().setOnClickListener(v -> backListener.back());
 
             }
         }
@@ -114,7 +109,7 @@ public class ToolbarLayout extends FrameLayout {
 
     private ImageView backBtn;
 
-    private ImageView getBackBtn() {
+    public ImageView getBackBtn() {
         if (null == backBtn)
             backBtn = findViewById(R.id.toolbarBack);
         return backBtn;
