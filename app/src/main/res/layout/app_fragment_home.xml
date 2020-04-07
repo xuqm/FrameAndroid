@@ -19,33 +19,28 @@
                 android:orientation="vertical"
                 app:elevation="0dp">
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="16:9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    app:tabIndicatorColor="@color/colorPrimary"
-                    app:tabInlineLabel="true"
-                    app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/colorPrimary"
-                    app:tabTextColor="@color/dark_gray" />
-
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="16:9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
+            <FrameLayout
+                android:id="@+id/home_flyt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
                 android:overScrollMode="never"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

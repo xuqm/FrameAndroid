@@ -2,6 +2,7 @@ package com.xuqm.frame.repository;
 
 import com.xuqm.base.model.HttpResult;
 import com.xuqm.frame.model.AD;
+import com.xuqm.frame.model.Article;
 import com.xuqm.frame.model.ListPaged;
 import com.xuqm.frame.model.User;
 
@@ -19,5 +20,8 @@ public interface Service {
 
     @GET("banner/json")
     Observable<HttpResult<ArrayList<AD>>> getAd();
+
+    @GET("article/list/{page}/json")
+    Observable<HttpResult<ListPaged<Article>>> getHome(@Path("page") int page);
 
 }

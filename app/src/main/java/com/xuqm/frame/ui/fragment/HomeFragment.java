@@ -1,6 +1,7 @@
 package com.xuqm.frame.ui.fragment;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.xuqm.base.common.LogHelper;
 import com.xuqm.base.ui.BaseFragment;
@@ -15,34 +16,45 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 
 public class HomeFragment extends BaseFragment<AppFragmentHomeBinding> {
+
+    private ArrayList<AD> list = new ArrayList<>();
+    private BannerImageAdapter adapter;
+
     private HomeViewModel viewModel;
+    private HomeListFragment fragment;
 
     @Override
     protected int getLayoutId() {
         return R.layout.app_fragment_home;
     }
 
-    private ArrayList<AD> list = new ArrayList<>();
-    private BannerImageAdapter adapter;
-
     @Override
     protected void initView() {
         super.initView();
-
+//        banner = Objects.requireNonNull(getActivity()).findViewById(R.id.banner);
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        fragment = new HomeListFragment(this);
 
         adapter = new BannerImageAdapter(list);
         getBinding().banner.setAdapter(adapter)
                 .setIndicator(new CircleIndicator(mContext))
                 .setIndicatorNormalColorRes(R.color.dark_gray)
                 .setIndicatorSelectedColorRes(R.color.blue)
-                .setOnBannerListener(new OnBannerListener<AD>() {
+                .setOnBannerListener((OnBannerListener<AD>) (data, position) -> LogHelper.e("=====>点击了" + data + position));
 
-                    @Override
-                    public void OnBannerClick(AD data, int position) {
-                        LogHelper.e("=====>点击了" + data + position);
-                    }
-                });
+        getBinding().baseRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fragment.refresh();
+                viewModel.initData();
+                getBinding().baseRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.home_flyt, fragment)
+                .commit();
+
 
     }
 
@@ -51,16 +63,13 @@ public class HomeFragment extends BaseFragment<AppFragmentHomeBinding> {
         super.initData();
 
 
-        viewModel.adLiveData.observe(this, this::updateBanner);
+        viewModel.adLiveData.observe(this, getBinding().banner::setDatas);
         viewModel.initData();
 
     }
 
-    private void updateBanner(ArrayList<AD> ads) {
-        getBinding().banner.setDatas(ads);
-//        list.clear();
-//        list.addAll(ads);
-//        adapter.notifyDataSetChanged();
+    public void refreshFinished() {
+        getBinding().baseRefreshLayout.setRefreshing(false);
     }
 
 }
