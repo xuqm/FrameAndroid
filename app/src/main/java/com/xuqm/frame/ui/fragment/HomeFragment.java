@@ -1,14 +1,16 @@
 package com.xuqm.frame.ui.fragment;
 
+import android.view.View;
+
 import com.xuqm.base.adapter.BasePagedAdapter;
-import com.xuqm.base.adapter.CommonPagedAdapter;
-import com.xuqm.base.adapter.ViewHolder;
 import com.xuqm.base.common.LogHelper;
+import com.xuqm.base.common.ToolsHelper;
 import com.xuqm.base.ui.BaseListAppBarFragment;
 import com.xuqm.frame.R;
 import com.xuqm.frame.model.AD;
 import com.xuqm.frame.model.Article;
 import com.xuqm.frame.ui.adapter.BannerImageAdapter;
+import com.xuqm.frame.ui.adapter.CommonArticleAdapter;
 import com.xuqm.frame.viewmodel.HomeListViewModel;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
@@ -18,16 +20,9 @@ import java.util.ArrayList;
 
 public class HomeFragment extends BaseListAppBarFragment<Article, HomeListViewModel> {
 
-    private CommonPagedAdapter<Article> adapter = new CommonPagedAdapter<Article>(R.layout.user_item_user) {
-        @Override
-        protected void convert(ViewHolder holder, Article item, int position) {
-            holder.setText(R.id.tvTitle, item.getTitle());
-        }
-    };
-
     @Override
     public BasePagedAdapter<Article> adapter() {
-        return adapter;
+        return new CommonArticleAdapter();
     }
 
 
@@ -58,14 +53,13 @@ public class HomeFragment extends BaseListAppBarFragment<Article, HomeListViewMo
     protected void initData() {
         super.initData();
 
-
         getViewModel().adLiveData.observe(this, banner::setDatas);
         getViewModel().get();
 
     }
 
-    public void refreshFinished() {
-        getBinding().baseRefreshLayout.setRefreshing(false);
+    @Override
+    public void itemClicked(View view, Article item, int position) {
+        ToolsHelper.snack(getBinding().baseRefreshLayout, item.toString());
     }
-
 }

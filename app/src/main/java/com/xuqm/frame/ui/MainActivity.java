@@ -74,12 +74,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         getBinding().mainBottomNav.setItemIconTintList(null);
         getBinding().mainBottomNav.setOnNavigationItemSelectedListener(item -> {
             if (R.id.main_bottom_home == item.getItemId()) {
-                getBinding().mainViewPager.setCurrentItem(0);
+                getBinding().mainViewPager.setCurrentItem(0, false);
             } else if (R.id.main_bottom_app == item.getItemId()) {
-                getBinding().mainViewPager.setCurrentItem(1);
+                getBinding().mainViewPager.setCurrentItem(1, false);
             } else if (R.id.main_bottom_class == item.getItemId()) {
-                getBinding().mainViewPager.setCurrentItem(2);
-            } else getBinding().mainViewPager.setCurrentItem(3);
+                getBinding().mainViewPager.setCurrentItem(2, false);
+            } else getBinding().mainViewPager.setCurrentItem(3, false);
             return true;
         });
     }

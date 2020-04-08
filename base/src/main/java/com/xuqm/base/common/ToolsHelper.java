@@ -10,6 +10,16 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class ToolsHelper {
+
+    public static boolean isNull(Object obj) {
+        if (null == obj)
+            return true;
+        String str = obj.toString();
+        if (str.isEmpty())
+            return true;
+        return str.equalsIgnoreCase("null");
+    }
+
     /**
      * 弹出提示信息  感觉比Toast好看点  不过Toast不需要依赖view
      *

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:background="#F6F6F6" />
+
+        <LinearLayout
+            android:id="@+id/heard"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_header_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_home_class"
+                android:padding="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="置顶"
+                android:textColor="#ffee5c5c"
+                android:textSize="7sp" />
+
+            <TextView
+                android:id="@+id/home_header_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_home_class"
+                android:padding="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="新"
+                android:textColor="#ffee5c5c"
+                android:textSize="7sp" />
+
+            <TextView
+                android:id="@+id/home_header_wchat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_home_class_b"
+                android:padding="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="公众号"
+                android:textColor="#22AD79"
+                android:textSize="7sp" />
+
+            <TextView
+                android:id="@+id/home_header_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_home_class_b"
+                android:padding="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="项目"
+                android:textColor="#22AD79"
+                android:textSize="7sp" />
+
+            <TextView
+                android:id="@+id/home_header_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_home_class_b"
+                android:padding="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="本站发布"
+                android:textColor="#22AD79"
+                android:textSize="7sp" />
+
+            <TextView
+                android:id="@+id/home_header_qa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_home_class_b"
+                android:padding="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="问答"
+                android:textColor="#22AD79"
+                android:textSize="7sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/home_content_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="50dp"
+                android:text="如何加载100M的图片却不撑爆内存如何加载100M的图片却不撑爆内存,一张 100M 的大图，如何预防 OOM？如何加载100M的图片却不撑爆内存,一张 100M 的大图，如何预防 OOM？"
+                android:textColor="#ff000000"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/home_content_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="分享人:adyeah"
+                    android:textColor="#666666"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/home_content_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="分类:adyeah"
+                    android:textColor="#666666"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/home_content_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="时间:adyeah"
+                    android:textColor="#666666"
+                    android:textSize="9sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/home_content_collect"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_heart" />
+    </RelativeLayout>
+</LinearLayout>
