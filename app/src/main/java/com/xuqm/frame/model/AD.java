@@ -8,6 +8,10 @@ public class AD {
     private String imagePath;
     private String url;
 
+    public AD(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public int getId() {
         return id;
     }

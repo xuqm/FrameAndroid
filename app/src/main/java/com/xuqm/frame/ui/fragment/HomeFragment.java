@@ -1,61 +1,57 @@
 package com.xuqm.frame.ui.fragment;
 
-import androidx.lifecycle.ViewModelProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import com.xuqm.base.adapter.BasePagedAdapter;
+import com.xuqm.base.adapter.CommonPagedAdapter;
+import com.xuqm.base.adapter.ViewHolder;
 import com.xuqm.base.common.LogHelper;
-import com.xuqm.base.ui.BaseFragment;
+import com.xuqm.base.ui.BaseListAppBarFragment;
 import com.xuqm.frame.R;
-import com.xuqm.frame.databinding.AppFragmentHomeBinding;
 import com.xuqm.frame.model.AD;
+import com.xuqm.frame.model.Article;
 import com.xuqm.frame.ui.adapter.BannerImageAdapter;
-import com.xuqm.frame.viewmodel.HomeViewModel;
+import com.xuqm.frame.viewmodel.HomeListViewModel;
+import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends BaseFragment<AppFragmentHomeBinding> {
+public class HomeFragment extends BaseListAppBarFragment<Article, HomeListViewModel> {
 
-    private ArrayList<AD> list = new ArrayList<>();
-    private BannerImageAdapter adapter;
-
-    private HomeViewModel viewModel;
-    private HomeListFragment fragment;
+    private CommonPagedAdapter<Article> adapter = new CommonPagedAdapter<Article>(R.layout.user_item_user) {
+        @Override
+        protected void convert(ViewHolder holder, Article item, int position) {
+            holder.setText(R.id.tvTitle, item.getTitle());
+        }
+    };
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.app_fragment_home;
+    public BasePagedAdapter<Article> adapter() {
+        return adapter;
+    }
+
+
+    private ArrayList<AD> list = new ArrayList<>();
+    private BannerImageAdapter bannerImageAdapter;
+
+    private Banner banner;
+
+    @Override
+    protected int getAppBarView() {
+        return R.layout.user_item_user_title;
     }
 
     @Override
     protected void initView() {
         super.initView();
-//        banner = Objects.requireNonNull(getActivity()).findViewById(R.id.banner);
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        fragment = new HomeListFragment(this);
+        banner = getActivity().findViewById(R.id.banner);
 
-        adapter = new BannerImageAdapter(list);
-        getBinding().banner.setAdapter(adapter)
+        bannerImageAdapter = new BannerImageAdapter(list);
+        banner.setAdapter(bannerImageAdapter)
                 .setIndicator(new CircleIndicator(mContext))
                 .setIndicatorNormalColorRes(R.color.dark_gray)
                 .setIndicatorSelectedColorRes(R.color.blue)
                 .setOnBannerListener((OnBannerListener<AD>) (data, position) -> LogHelper.e("=====>点击了" + data + position));
-
-        getBinding().baseRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fragment.refresh();
-                viewModel.initData();
-                getBinding().baseRefreshLayout.setRefreshing(false);
-            }
-        });
-
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.home_flyt, fragment)
-                .commit();
-
-
     }
 
     @Override
@@ -63,8 +59,8 @@ public class HomeFragment extends BaseFragment<AppFragmentHomeBinding> {
         super.initData();
 
 
-        viewModel.adLiveData.observe(this, getBinding().banner::setDatas);
-        viewModel.initData();
+        getViewModel().adLiveData.observe(this, banner::setDatas);
+        getViewModel().get();
 
     }
 
