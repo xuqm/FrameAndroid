@@ -15,7 +15,7 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class BaseViewModel extends ViewModel implements DefaultLifecycleObserver {
     private final String TAG = getClass().getSimpleName();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    protected CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     /**
      * Disposable 的管理，自动处理网络请求

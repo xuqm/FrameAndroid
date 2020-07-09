@@ -5,13 +5,13 @@ package com.xuqm.base.adapter;
  * 数据model都要继承BaseItem
  */
 public class BaseItem {
-    private int id;
+    private int s_id;
 
-    public int getId() {
-        return id;
+    public int getS_id() {
+        return s_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setS_id(int s_id) {
+        this.s_id = s_id;
     }
 }

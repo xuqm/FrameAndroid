@@ -25,7 +25,7 @@ public class App extends Application {
 
     public App() {
         instance = this;
-        appComponent = HttpManager.getAppComponent("https://www.wanandroid.com");
+        appComponent = HttpManager.getAppComponent("");
     }
 
     //https://www.wanandroid.com/wxarticle/list/408/1/json

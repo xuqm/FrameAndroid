@@ -2,7 +2,6 @@ package com.xuqm.base.ui;
 
 import android.view.View;
 
-import androidx.annotation.LayoutRes;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +23,7 @@ public abstract class BaseListFragment<T extends BaseItem, VM extends BaseListVi
 
     private ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
     private Class<VM> cal = (Class<VM>) parameterizedType.getActualTypeArguments()[1];
-    private VM viewModel;
+    protected VM viewModel;
 
     private BasePagedAdapter<T> adapter;
 
@@ -45,13 +44,20 @@ public abstract class BaseListFragment<T extends BaseItem, VM extends BaseListVi
     @Override
     protected void initView() {
 
-        viewModel = new ViewModelProvider(this).get(cal);
+        if (getFactory() == null)
+            viewModel = new ViewModelProvider(this).get(cal);
+        else
+            viewModel = new ViewModelProvider(this, getFactory()).get(cal);
         adapter = adapter();
         adapter.setItemClickListener(this::itemClicked);
         adapter.setItemLongClickListener(this::itemLongClicked);
         getBinding().baseRecyclerView.setAdapter(adapter);
         getBinding().baseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         getBinding().baseRefreshLayout.setOnRefreshListener(() -> viewModel.invalidate());
+    }
+
+    protected ViewModelProvider.Factory getFactory() {
+        return null;
     }
 
     @Override

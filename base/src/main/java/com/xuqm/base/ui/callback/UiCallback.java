@@ -14,8 +14,10 @@ public interface UiCallback {
 
     void initData();
 
-    boolean showToolbar();
+    int showStatus();
 
     boolean transparentStatusBar();
+
+    boolean fullscreen();
 
 }

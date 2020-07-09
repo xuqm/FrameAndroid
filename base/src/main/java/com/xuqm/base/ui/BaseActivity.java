@@ -3,9 +3,9 @@ package com.xuqm.base.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -40,15 +40,28 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
             ImmersionBar.with(this)
                     .init();
             setContentView();
-        } else if (!showToolbar()) {//没有toolbar但是有状态栏的情况
+        } else if (showStatus() != -1) {//没有toolbar但是有状态栏的情况
             bindUI(getLayoutId());
             ImmersionBar.with(this)
                     .titleBar(binding.getRoot()) //指定标题栏view
+                    .statusBarColor(showStatus())
+                    .autoStatusBarDarkModeEnable(true)
                     .init();
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         } else if (transparentStatusBar()) {//透明状态栏，但是显示状态栏的内容
             bindUI(getLayoutId());
-            ImmersionBar.with(this).transparentBar().hideBar(BarHide.FLAG_HIDE_STATUS_BAR).init();
+            ImmersionBar.with(this).transparentBar()
+                    .titleBar(binding.getRoot().findViewWithTag("top_status"))
+//                    .hideBar(BarHide.FLAG_HIDE_STATUS_BAR)
+                    .init();
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+        } else if (fullscreen()) {//全屏，什么都不显示
+            bindUI(getLayoutId());
+            ImmersionBar.with(this)
+                    .fullScreen(true)
+                    .hideBar(BarHide.FLAG_HIDE_STATUS_BAR)
+                    .init();
 //            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         } else {//使用base提供的toolbar
@@ -164,23 +177,36 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     }
 
     /**
-     * 是否需要展示toolbar，默认为true，使用默认布局展示toolbar
+     * 是否需要展示statusBar，默认为false，使用默认布局展示toolbar
      * false的话，可以自定义toolbar
      *
-     * @return 是否展示默认toolbar
+     * @return statusBar 的颜色
      */
     @Override
-    public boolean showToolbar() {
-        return true;
+    @ColorRes
+    public int showStatus() {
+        return -1;
     }
 
     /**
      * 如果返回true，则状态栏变成透明状态，但是状态栏的文字还显示
+     * 使用透明状态栏  布局必须指定一个  android:tag="top_status"
+     * 最好是第一个子元素指定，可以自动设置padding
      *
      * @return 是否需要设置状态栏为透明状态
      */
     @Override
     public boolean transparentStatusBar() {
+        return false;
+    }
+
+    /**
+     * 是不是黑色主题
+     *
+     * @return 全屏展示
+     */
+    @Override
+    public boolean fullscreen() {
         return false;
     }
 
