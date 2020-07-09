@@ -49,10 +49,10 @@
         <!--        下面时act信息-->
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.WelcomeActivity"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="portrait"
             android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,7 @@
         </activity>
         <activity
             android:name=".ui.LoginActivity"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
 
     </application>
